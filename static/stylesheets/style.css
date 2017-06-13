@@ -1,0 +1,10 @@
+h1, h2 {color: #65605e; font-family: Helvetica;}
+
+h1.header { line-height: 1.2; font-weight: 200; }
+
+h2.section-title {color: white; background-color: #606a70;}
+
+.assignee { text-indent: 20px}
+
+strong.item-title {font-weight: 700;}
+

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css')}}">
+    <title>Presidency</title>
+</head>
+<body>
+{% include "header.html" %}
+
+{% for section in sections %}{% set section_index=loop.index0 %}
+    <h2>{{ section.title }}</h2>
+    {% for item in section.items %}
+        <div>
+            {% include item.template_finished with context %}
+        </div>
+    {% endfor %}
+{% endfor %}
+</body>
+</html>

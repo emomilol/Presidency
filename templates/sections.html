@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css')}}">
+    <title>Presidency</title>
+</head>
+<body>
+{% include "header.html" %}
+<form method="post" action=".">
+{% for section in sections %}
+    {% set section_index=loop.index0 %}
+    <h2 class="section-title" id="{{ section_index }}">{{ section.title }}</h2>
+    <input type="hidden" name="section-title.{{ section_index }}" value="{{ section.title }}">
+    {% for item in section.items %}
+        <div>
+            {% set index=loop.index0 %}
+            {% include item.template with context %}
+        </div>
+    {% endfor %}
+{% endfor %}
+    <input type="submit"/>
+</form>
+</body>
+</html>

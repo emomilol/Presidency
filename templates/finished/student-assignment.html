@@ -1,0 +1,11 @@
+<time class="item-time">{{ item.time }}</time>
+<strong class="item-title">{{ item.title }}</strong>
+<br>
+    <u>Student: </u>
+        <i class="assignee">{{ item.assignee }}</i>
+    {% if item.partner %}
+    <u>Partner: </u>
+        <i class="partner">{{ item.partner }}</i>
+    {% endif %}
+    <u>Point: </u>
+        <span class="point">{{ item.point }}</span>

@@ -1,0 +1,8 @@
+<time class="item-time">{{ item.time }}</time>
+<strong class="item-title">{{ item.title }}</strong>
+<label>Assignee:</label>
+<input type="text" name="assignee.{{ section_index }}.{{ index }}" />
+
+<input type="hidden" name="title.{{ section_index }}.{{ index }}" value="{{ item.title }}">
+<input type="hidden" name="time.{{ section_index }}.{{ index }}" value="{{ item.time }}">
+<input type="hidden" name="duration.{{ section_index }}.{{ index }}" value="{{ item.duration }}">
