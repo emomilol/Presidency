@@ -1,4 +1,10 @@
 import models
+from get_content import get_point_title_and_url, get_song_title
+import re
+
+def set_song_subtitle(song):
+    m = re.match(r"[^\d]*(\d+)", song.title)
+    song.subtitle = get_song_title(m.group(1))
 
 
 def create_tree(form):
@@ -30,6 +36,8 @@ def section1(tree, titles):
     song = models.Assignment(item0['title'], 5, item0['assignee'])
     song.time = item0['time']
 
+    set_song_subtitle(song)
+
     item1 = tree[0][1]
     comments = models.ProgramItem(item1['title'], 3)
     comments.time = item1['time']
@@ -53,7 +61,7 @@ def section2(tree, titles):
     item2 = tree[1][2]
     reading = models.StudentsAssignment(item2['title'], item2['duration'],
                                         item2['student'], None,
-                                        item2['point'])
+                                        *get_point_title_and_url(item2['point']))
     reading.time = item2['time']
 
     items = [treasures, gems, reading]
@@ -70,7 +78,7 @@ def section3(tree, titles):
         if 'student' in item:
             index = models.StudentsAssignment(item['title'], item['duration'],
                                               item['student'], item['partner'],
-                                              item['point'])
+                                              *get_point_title_and_url(item['point']))
             index.time = item['time']
             items.append(index)
         else:
@@ -90,6 +98,9 @@ def section4(tree, titles):
 
     song = models.ProgramItem(tree[3][0]['title'], tree[3][0]['duration'])
     song.time = tree[3][0]['time']
+
+    set_song_subtitle(song)
+
     items.append(song)
 
     for index, item in enumerate(tree[3][1:-2]):
@@ -105,6 +116,9 @@ def section4(tree, titles):
     prayer = models.Assignment(tree[3][-1]['title'], 5,
                                tree[3][-1]['assignee'])
     prayer.time = tree[3][-1]['time']
+
+    set_song_subtitle(prayer)
+
     items.append(prayer)
 
     section = models.Section(titles[3], items)
