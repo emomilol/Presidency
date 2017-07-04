@@ -163,11 +163,11 @@ def section4_parts(section):
 
 
 def extract_name_and_duration(item):
-    text = unicode(item.get_text())
+    text = str(item.get_text())
     if ')' in text:
         end = text.rfind(')')
         text = text[:end + 1]
 
     duration_str = text[text.rfind('('):]
-    duration = int(filter(unicode.isdigit, duration_str))
+    duration = int(''.join(filter(str.isdigit, duration_str)))
     return text, duration
