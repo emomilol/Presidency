@@ -69,7 +69,4 @@
     </LinkMapSettings>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.1 virtualenv at ~/Software/Presidency/env" project-jdk-type="Python SDK" />
-  <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
-  </component>
 </project>

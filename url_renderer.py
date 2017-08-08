@@ -24,7 +24,7 @@ def get_current_url():
         month=month,
         year=year,
         start_day=start_day,
-        start_month=start_month,
-        end_month=end_month,
+        start_month=start_month[:3],
+        end_month=end_month[:3],
         end_day=end_day
     )

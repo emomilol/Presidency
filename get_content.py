@@ -3,12 +3,6 @@ from bs4 import BeautifulSoup
 import re
 
 
-url1 = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/april-2017-mwb/rogramm-fuer-10-16apr/'
-url2 = 'https://www.jw.org/en/publications/jw-meeting-workbook/april-2017-mwb/meeting-schedule-apr17-23/'
-url3 = 'https://www.jw.org/es/publicaciones/guia-actividades-reunion-testigos-jehova/abril-2017-mwb/programa-reunion-10-16abr/'
-url4 = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/april-2017-mwb/programm-fuer-3-9apr/'
-
-
 def get_content(url):
     r = requests.get(url)
     html = r.text
@@ -17,7 +11,7 @@ def get_content(url):
     return content
 
 
-be_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21033'
+be_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21055'
 
 def get_point_title_and_url(point):
     r = requests.get(be_url)
@@ -27,8 +21,8 @@ def get_point_title_and_url(point):
     return title_el.string, "http://wol.jw.org" + title_el.parent.parent['href']
 
 
-song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21034'
-new_song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21035'
+song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21056'
+new_song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21057'
 
 def get_song_title(number):
     number = int(number)
