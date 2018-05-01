@@ -5,32 +5,46 @@ import re
 
 def get_content(url):
     r = requests.get(url)
+    r.raise_for_status()
     html = r.text
     soup = BeautifulSoup(html, 'html.parser')
     content = soup.article
     return content
 
+def get_soup_from_enhanced_url(enhanced_url):
+    chain = [s.strip() for s in enhanced_url.split('>')]
 
-be_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21055'
+    url = chain[0]
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+
+    for link_text in chain[1:]:
+        link_el = soup.find(class_="title", string=link_text)
+        while link_el.name != 'a':
+            link_el = link_el.parent
+
+        url = 'https://wol.jw.org' + link_el['href']
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+    return soup
+
+
+be_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0 > Bücher > Predigtdienstschul-Buch  (be)'
 
 def get_point_title_and_url(point):
-    r = requests.get(be_url)
-    soup = BeautifulSoup(r.text, 'html.parser')
+    soup = get_soup_from_enhanced_url(be_url)
     title_el = soup.find(name="span", class_="title", text=re.compile(r"^\s*{} ".format(point.strip())))
 
     return title_el.string, "http://wol.jw.org" + title_el.parent.parent['href']
 
 
-song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21056'
-new_song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0/21057'
+song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0 > Bücher > Singt voller Freude  (sjj)'
 
 def get_song_title(number):
     number = int(number)
 
-    url = song_url if number < 136 else new_song_url
-
-    r = requests.get(url)
-    soup = BeautifulSoup(r.text, 'html.parser')
+    soup = get_soup_from_enhanced_url(song_url)
     title_el = soup.find(name="span", class_="title", text=re.compile(r"^\s*{} ".format(number)))
 
     r = requests.get('https://wol.jw.org' + title_el.parent.parent['href'])
