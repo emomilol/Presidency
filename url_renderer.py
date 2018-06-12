@@ -8,6 +8,7 @@ template = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/{month}-{year}-mw
 REPLACEMENTS =  {
     'sep': 'sept',
     'mae': 'maerz',
+    'jun': 'juni',
 }
 
 def month_abbreviation(month):
