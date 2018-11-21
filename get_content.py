@@ -1,21 +1,59 @@
 import requests
 from bs4 import BeautifulSoup
-
-
-
-url1 = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/april-2017-mwb/rogramm-fuer-10-16apr/'
-url2 = 'https://www.jw.org/en/publications/jw-meeting-workbook/april-2017-mwb/meeting-schedule-apr17-23/'
-url3 = 'https://www.jw.org/es/publicaciones/guia-actividades-reunion-testigos-jehova/abril-2017-mwb/programa-reunion-10-16abr/'
-url4 = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/april-2017-mwb/programm-fuer-3-9apr/'
+import re
 
 
 def get_content(url):
     r = requests.get(url)
+    r.raise_for_status()
     html = r.text
     soup = BeautifulSoup(html, 'html.parser')
     content = soup.article
     return content
 
+def get_soup_from_enhanced_url(enhanced_url):
+    chain = [s.strip() for s in enhanced_url.split('>')]
+
+    url = chain[0]
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+
+    for link_text in chain[1:]:
+        link_el = soup.find(class_="title", string=link_text)
+        while link_el.name != 'a':
+            link_el = link_el.parent
+
+        url = 'https://wol.jw.org' + link_el['href']
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+    return soup
 
 
+be_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0 > Bücher > Predigtdienstschul-Buch  (be)'
 
+def get_point_title_and_url(point):
+    soup = get_soup_from_enhanced_url(be_url)
+    title_el = soup.find(name="span", class_="title", text=re.compile(r"^\s*{} ".format(point.strip())))
+
+    return title_el.string, "http://wol.jw.org" + title_el.parent.parent['href']
+
+
+song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0 > Bücher > Singt voller Freude  (sjj)'
+
+def get_song_title(number):
+    number = int(number)
+
+    soup = get_soup_from_enhanced_url(song_url)
+    title_el = soup.find(name="span", class_="title", text=re.compile(r"^\s*{} ".format(number)))
+
+    r = requests.get('https://wol.jw.org' + title_el.parent.parent['href'])
+    soup = BeautifulSoup(r.text, 'html.parser')
+
+    title = "{} {} {}".format(
+        number,
+        soup.find(name="h1").string,
+        ''.join(soup.find(class_="themeScrp").stripped_strings)
+    )
+
+    return title

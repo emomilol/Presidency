@@ -5,18 +5,14 @@ import extract_content
 import datetime
 import extract_form
 
-url1 = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/april-2017-mwb/rogramm-fuer-10-16apr/'
-url2 = 'https://www.jw.org/en/publications/jw-meeting-workbook/april-2017-mwb/meeting-schedule-apr17-23/'
-url3 = 'https://www.jw.org/es/publicaciones/guia-actividades-reunion-testigos-jehova/abril-2017-mwb/programa-reunion-10-16abr/'
-url4 = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/mai-2017-mwb/programm-fuer-15-21mai/'
-content = get_content.get_content(url4)
+content = get_content.get_content(url_renderer.get_current_url())
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def presidency():
-    start_time = datetime.datetime(1, 1, 1, 19)
+    start_time = datetime.datetime(2000, 1, 1, 19)
 
     header = extract_content.header(content)
     sections = [extract_content.section1(content), extract_content.section2(content), extract_content.section3(content),

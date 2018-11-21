@@ -1,4 +1,4 @@
-<time class="item-time">{{ item.time }}</time>
+<time class="item-time">{{ item.time.strftime('%H:%M') }}</time>
 <strong class="item-title"> {{ item.title }} </strong>
 
 <input type="hidden" name="title.{{ section_index }}.{{ index }}" value="{{ item.title }}">

@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css')}}">
     <title>Presidency</title>
+    <style>
+      time {
+        text-decoration: underline;
+      }
+
+      a {
+        display: none;
+      }
+
+      span:hover a {
+        display: inline;
+      }
+    </style>
 </head>
 <body>
 {% include "header.html" %}
@@ -11,9 +24,10 @@
 {% for section in sections %}{% set section_index=loop.index0 %}
     <h2>{{ section.title }}</h2>
     {% for item in section.items %}
-        <div>
+        <div class="item">
             {% include item.template_finished with context %}
         </div>
+        <br>
     {% endfor %}
 {% endfor %}
 </body>

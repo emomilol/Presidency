@@ -1,11 +1,8 @@
-<time class="item-time">{{ item.time }}</time>
-<strong class="item-title">{{ item.title }}</strong>
-<br>
-    <u>Student: </u>
-        <i class="assignee">{{ item.assignee }}</i>
-    {% if item.partner %}
-    <u>Partner: </u>
-        <i class="partner">{{ item.partner }}</i>
-    {% endif %}
-    <u>Point: </u>
-        <span class="point">{{ item.point }}</span>
+<time class="item-time">{{ item.time[:-3] }}</time><br>
+<strong class="item-title">{{ item.title }}</strong><br>
+<i class="assignee">{{ item.assignee }}</i>
+{% if item.partner %}
+  <i class="partner">/ {{ item.partner }}</i>
+{% endif %}
+<br><br>
+<span class="point">{{ item.point }} <a href="{{ item.point_url }}" target="_blank">[link]</a></span><br>
