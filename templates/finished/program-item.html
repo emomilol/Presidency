@@ -1,2 +1,5 @@
-<time class="item-time">{{ item.time }}</time>
-<strong class="item-title">{{ item.title }}</strong>
+<time class="item-time">{{ item.time[:-3] }}</time><br>
+<strong class="item-title">{{ item.title }}</strong><br>
+{% if item.subtitle %}
+  <span>{{ item.subtitle }}</span><br>
+{% endif %}

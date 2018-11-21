@@ -163,11 +163,11 @@ def section4_parts(section):
 
 
 def extract_name_and_duration(item):
-    text = unicode(item.get_text())
+    text = str(item.get_text()).replace('(Video)', '')
     if ')' in text:
-        end = text.rfind(')')
+        end = text.find(')')
         text = text[:end + 1]
 
-    duration_str = text[text.rfind('('):]
-    duration = int(filter(unicode.isdigit, duration_str))
+    duration_str = text[text.find('('):]
+    duration = int(''.join(filter(str.isdigit, duration_str)))
     return text, duration
