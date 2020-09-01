@@ -3,7 +3,7 @@ import locale
 
 locale.setlocale(locale.LC_ALL, 'de_DE')
 
-template = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/{month}-{year}-mwb/programm-fuer-{start_day}{start_month}-{end_day}{end_month}/'
+template = 'https://www.jw.org/de/publikationen/jw-arbeitsheft/{month}-{year}-mwb/' # programm-fuer-{start_day}{start_month}-{end_day}{end_month}/'
 
 REPLACEMENTS =  {
     'sep': 'sept',
