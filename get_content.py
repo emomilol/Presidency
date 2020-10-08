@@ -47,12 +47,13 @@ def get_point_title_and_url(point):
     return title, link
 
 
-song_url = 'https://wol.jw.org/de/wol/lv/r10/lp-x/0 > Bücher > Singt voller Freude  (sjj)'
+song_url = 'https://wol.jw.org/es/wol/library/r4/lp-s/biblioteca > Libros > Cantemos con gozo (sjj)'
 
 def get_song_title(number):
     number = int(number)
 
     soup = get_soup_from_enhanced_url(song_url)
+    print(soup)
     if soup is None:
         return ''
 

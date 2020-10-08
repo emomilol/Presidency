@@ -86,7 +86,7 @@ def section2_part2(section):
 
 
 def section2_part3(section):
-    part3 = section.find(id='p15')
+    part3 = section.find(id='p14')
 
     reading = part3.get_text()
     reading_duration = 4
