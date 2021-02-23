@@ -39,8 +39,9 @@ def section1(tree, titles):
     set_song_subtitle(song)
 
     item1 = tree[0][1]
-    comments = models.ProgramItem(item1['title'], 3)
+    comments = models.ProgramItem(item1['title'], 1)
     comments.time = item1['time']
+    comments.comments = item1['comments']
 
     items = [song, comments]
 
@@ -61,7 +62,7 @@ def section2(tree, titles):
     item2 = tree[1][2]
     reading = models.StudentsAssignment(item2['title'], item2['duration'],
                                         item2['student'], None,
-                                        *get_point_title_and_url(item2['point']))
+                                        item2['point'])
     reading.time = item2['time']
 
     items = [treasures, gems, reading]
@@ -78,7 +79,7 @@ def section3(tree, titles):
         if 'student' in item:
             index = models.StudentsAssignment(item['title'], item['duration'],
                                               item['student'], item['partner'],
-                                              *get_point_title_and_url(item['point']))
+                                              item['point'])
             index.time = item['time']
             items.append(index)
         else:

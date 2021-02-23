@@ -37,7 +37,7 @@ def section1_part2(section):
     comments = section.find(id='p4')
 
     opening_comments = comments.get_text()
-    comments_duration = 3
+    comments_duration = 1
 
     item = models.ProgramItem(opening_comments, comments_duration)
 
@@ -75,10 +75,10 @@ def section2_part1(section):
 
 
 def section2_part2(section):
-    part2 = section.find(id='p10')
+    part2 = section.find(id='p7')
 
     gems = part2.get_text()
-    gems_duration = 8
+    gems_duration = 10
 
     item = models.Assignment(gems, gems_duration)
 
@@ -86,7 +86,7 @@ def section2_part2(section):
 
 
 def section2_part3(section):
-    part3 = section.find(id='p14')
+    part3 = section.find(id='p10')
 
     reading = part3.get_text()
     reading_duration = 4

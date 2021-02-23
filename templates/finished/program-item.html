@@ -2,4 +2,8 @@
 <strong class="item-title">{{ item.title }}</strong><br>
 {% if item.subtitle %}
   <span>{{ item.subtitle }}</span><br>
+    {% if item.comments %}
+        <br><br>
+        <span>{{ item.comments }}</span>
+    {% endif %}
 {% endif %}

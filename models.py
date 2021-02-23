@@ -10,10 +10,11 @@ class ProgramItem(object):
     template = "program-item.html"
     template_finished = 'finished/program-item.html'
 
-    def __init__(self, title, duration, subtitle=None):
+    def __init__(self, title, duration, comments=None, subtitle=None):
         self.title = title
         self.duration = duration
         self.subtitle = subtitle
+        self.comments = comments
         self.time = None
 
 

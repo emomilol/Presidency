@@ -1,5 +1,7 @@
 <time class="item-time">{{ item.time.strftime('%H:%M') }}</time>
 <strong class="item-title"> {{ item.title }} </strong>
+<label for="">Comments:</label>
+<textarea name="comments.{{ section_index }}.{{ index }}"></textarea>
 
 <input type="hidden" name="title.{{ section_index }}.{{ index }}" value="{{ item.title }}">
 <input type="hidden" name="time.{{ section_index }}.{{ index }}" value="{{ item.time }}">
